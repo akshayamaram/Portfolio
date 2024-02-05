@@ -15,7 +15,10 @@ function startLoad() {
   let currVal = 0;
 
   function updateCounter() {
+    
     if (currVal === 100) {
+      counterElem.style.pointerEvents = "none";
+      document.querySelector(".overlay").style.pointerEvents = "none";
       return;
     }
 
