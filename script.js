@@ -38,18 +38,6 @@ function smoothScroll() {
   ScrollTrigger.refresh();
 }
 
-// function cursorFollower() {
-//     let cursor = document.querySelector("#cursor");
-//     let main = document.querySelector("#main");
-
-//     main.addEventListener("mousemove", function (dets) {
-//       cursor.style.left = dets.x + "px";
-//       cursor.style.top = dets.y + "px";
-//     });
-// }
-
-// cursorFollower()
-
 function startLoad() {
   let counterElem = document.querySelector(".counter");
   let currVal = 0;
@@ -57,6 +45,7 @@ function startLoad() {
   function updateCounter() {
     if (currVal === 100) {
       counterElem.style.pointerEvents = "none";
+      document.querySelector(".loader").style.pointerEvents = "none";
       document.querySelector(".overlay").style.pointerEvents = "none";
       return;
     }
@@ -79,6 +68,7 @@ function startLoad() {
 
 function loaderAnimation() {
   var tl = gsap.timeline();
+  const text = new SplitType("#hmp2-section1 h2");
 
   tl.to(".counter", 0.25, {
     delay: 3.5,
@@ -86,7 +76,6 @@ function loaderAnimation() {
   });
 
   tl.to(".bar", 1.5, {
-    // delay: 3.5,
     height: 0,
     stagger: {
       amount: 0.5,
@@ -94,19 +83,89 @@ function loaderAnimation() {
     ease: "power4.inOut",
   });
 
-  tl.from("#hero1", {
-    y: "-100%",
+  // tl.from(['#hmp1-section2 a', '#hmp1-section3 a', '#hmp1-section4 a'],{
+  //   x: "-100%",
+  //   duration:0.3,
+  //   opacity: 0,
+  //   stagger: .03,
+  //   ease: "SlowMo.easeOut"
+  // })
+
+  tl.from(".char", {
+    y: "100%",
+    stagger: 0.08,
     duration: 1,
-    delay: 0.5,
     opacity: 0,
-    ease: "expo.out",
+    ease: "back.out(1.7)",
   });
 
-  tl.from("#hero2", {
+  tl.from(".text-reveal-type3", {
     y: "100%",
-    duration: 1,
+    duration: 0.7,
     opacity: 0,
-    ease: "expo.out",
+    ease: "SlowMo.easeOut",
+  });
+
+  //  gsap.registerPlugin(scrollTrigger);
+  //   tl.to("#abp2-left p", {
+  //     backgroundPositionX: "0%",
+  //     backgroundSize: "100%",
+  //     stagger: 1,
+  //     scrollTrigger: {
+  //       trigger: "#abp2-left p",
+  //       scroller: "#about-page",
+  //       scrub: true,
+  //       start: "top center",
+  //       end: "bottom top",
+  //       // markers: true
+  //     },
+  //   });
+}
+
+function scrollToAbout() {
+  var section = document.querySelector("#about-page");
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+}
+
+function scrollToWorks() {
+  var section = document.querySelector("#works-page");
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+}
+
+function cursorFollower() {
+  const cursorInner = document.querySelector("[data-cursor-inner]");
+  const cursorOuter = document.querySelector("[data-cursor-outer]");
+
+  window.addEventListener("mousemove", function (e) {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    cursorInner.style.left = `${posX}px`;
+    cursorInner.style.top = `${posY}px`;
+
+    cursorOuter.animate(
+      {
+        left: `${posX}px`,
+        top: `${posY}px`,
+      },
+      { duration: 500, fill: "forwards" }
+    );
+  });
+}
+
+function getCurrentTime() {
+  let time = document.getElementById("current-time");
+  setInterval(() => {
+    let d = new Date();
+    time.innerHTML = d.toLocaleTimeString();
   });
 }
 
@@ -123,6 +182,9 @@ function worksPageAnimation() {
       movingImage.style.backgroundImage = `url(${image})`;
       movingImage.style.height = height;
       movingImage.style.width = width;
+      movingImage.style.backgroundSize = "cover";
+      movingImage.style.backgroundPosition = "center";
+      movingImage.style.objectFit = "cover";
       // console.log("hello");
     });
 
@@ -160,4 +222,6 @@ function worksPageAnimation() {
 smoothScroll();
 startLoad();
 loaderAnimation();
+cursorFollower();
+getCurrentTime();
 worksPageAnimation();
