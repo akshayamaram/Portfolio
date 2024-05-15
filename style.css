@@ -610,6 +610,7 @@ html,body {
     /* transform: rotate(2deg); */
     background-size: cover;
     object-fit: cover;   
+    object-position: center;
     transition: height 0.5s, width 0.5s, background-image 0.5s, transform cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
 }
 

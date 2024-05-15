@@ -184,7 +184,8 @@ function worksPageAnimation() {
       movingImage.style.width = width;
       movingImage.style.backgroundSize = "cover";
       movingImage.style.backgroundPosition = "center";
-      movingImage.style.objectFit = "cover";
+      // movingImage.style.objectFit = "cover";
+      // movingImage.style.objectPosition = "center";
       // console.log("hello");
     });
 
