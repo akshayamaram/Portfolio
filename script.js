@@ -170,31 +170,57 @@ function getCurrentTime() {
 }
 
 function worksPageAnimation() {
+
   const elements = document.querySelectorAll(".element");
-  const movingImage = document.querySelector("#image");
+  const movingVideo = document.querySelector("#video");
   const worksPage = document.querySelector("#works-page");
 
   elements.forEach(function (elem) {
     elem.addEventListener("mouseenter", function () {
-      let image = elem.getAttribute("data-image");
+      let videoSource = elem.getAttribute("data-video");
       let height = elem.getAttribute("data-height");
       let width = elem.getAttribute("data-width");
-      movingImage.style.backgroundImage = `url(${image})`;
-      movingImage.style.height = height;
-      movingImage.style.width = width;
-      movingImage.style.backgroundSize = "cover";
-      movingImage.style.backgroundPosition = "center";
-      // movingImage.style.objectFit = "cover";
-      // movingImage.style.objectPosition = "center";
-      // console.log("hello");
+      movingVideo.src = videoSource;
+      movingVideo.style.height = height;
+      movingVideo.style.width = width;
+      movingVideo.muted = true;
+      movingVideo.load();
+      movingVideo.play();
     });
 
     worksPage.addEventListener("mouseleave", function () {
-      movingImage.style.backgroundImage = "none";
-      movingImage.style.height = "0";
-      movingImage.style.width = "0";
-      // console.log("bye");
+      movingVideo.pause();
+      movingVideo.currentTime = 0;
+      // movingVideo.style.backgroundImage = "none";
+      movingVideo.style.height = "0";
+      movingVideo.style.width = "0";
     });
+  });
+
+  // const elements = document.querySelectorAll(".element");
+  // const movingImage = document.querySelector("#image");
+  // const worksPage = document.querySelector("#works-page");
+
+  // elements.forEach(function (elem) {
+  //   elem.addEventListener("mouseenter", function () {
+      
+  //     let image = elem.getAttribute("data-image");
+  //     let height = elem.getAttribute("data-height");
+  //     let width = elem.getAttribute("data-width");
+  //     movingImage.style.backgroundImage = `url(${image})`;
+  //     movingImage.style.height = height;
+  //     movingImage.style.width = width;
+  //     movingImage.style.backgroundSize = "cover";
+  //     movingImage.style.backgroundPosition = "center";
+  //     // console.log("hello");
+  //   });
+
+  //   worksPage.addEventListener("mouseleave", function () {
+  //     movingImage.style.backgroundImage = "none";
+  //     movingImage.style.height = "0";
+  //     movingImage.style.width = "0";
+  //     // console.log("bye");
+  //   });
 
     document.addEventListener("DOMContentLoaded", function () {
       document.addEventListener("mousemove", function (event) {
@@ -210,15 +236,15 @@ function worksPageAnimation() {
           mouseY >= rect.top &&
           mouseY <= rect.bottom
         ) {
-          movingImage.style.left = `${event.x - 150}px`;
-          movingImage.style.top = `${event.y - 100}px`;
+          movingVideo.style.left = `${event.x - 150}px`;
+          movingVideo.style.top = `${event.y - 100}px`;
           // movingImage.style.backgroundImage = `url(${image})`;
           // console.log("hey");
         }
       });
     });
-  });
-}
+  };
+
 
 smoothScroll();
 startLoad();
