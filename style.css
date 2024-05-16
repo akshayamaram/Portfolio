@@ -1118,20 +1118,20 @@ html,body {
         bottom: 0px;
     }
 
-    #image {
-        position: absolute;
+    #video {
+        display: none;
+        /* position: absolute;
         height: 250px;
         width: 350px;
         overflow: hidden;
-        /* background-color: red; */
+        background-color: red; 
         z-index: 9;
         left: 0;
         top: 0;
         background-position: center;
-        /* transform: rotate(2deg); */
         background-size: cover;
         object-fit: cover;   
-        transition: height 0.5s, width 0.5s, background-image 0.5s, transform cubic-bezier(0.19, 1, 0.22, 1) 0.4s;
+        transition: height 0.5s, width 0.5s, background-image 0.5s, transform cubic-bezier(0.19, 1, 0.22, 1) 0.4s; */ 
     }
 
 }
