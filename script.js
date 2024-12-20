@@ -246,9 +246,86 @@ function worksPageAnimation() {
   };
 
 
+function createSnowflake() {
+  const snowflake = document.createElement("div");
+  snowflake.classList.add("snowflake");
+
+  // Random starting position
+  snowflake.style.left = Math.random() * 100 + "vw";
+
+  // Random animation duration between 5-15 seconds
+  const animationDuration = Math.random() * 10 + 5;
+  snowflake.style.animationDuration = animationDuration + "s";
+
+  // Random size between 2-6px
+  const size = Math.random() * 4 + 2;
+  snowflake.style.width = size + "px";
+  snowflake.style.height = size + "px";
+
+  // Append to snowfall container instead of main
+  document.getElementById("weather-container").appendChild(snowflake);
+
+  // Remove snowflake after animation
+  setTimeout(() => {
+    snowflake.remove();
+  }, animationDuration * 1000);
+}
+
+function startSnowfall() {
+  // Create initial snowflakes
+  for (let i = 0; i < 50; i++) {
+    setTimeout(createSnowflake, Math.random() * 5000);
+  }
+
+  // Start the continuous snowfall
+  setInterval(createSnowflake, 100);
+}
+
+function createRaindrop() {
+  const raindrop = document.createElement("div");
+  raindrop.classList.add("raindrop");
+
+  raindrop.style.left = Math.random() * 100 + "vw";
+  const animationDuration = Math.random() * 1 + 0.5;
+  raindrop.style.animationDuration = animationDuration + "s";
+
+  document.getElementById("weather-container").appendChild(raindrop);
+
+  setTimeout(() => {
+    raindrop.remove();
+  }, animationDuration * 1000);
+}
+
+function startWeatherEffect() {
+  const month = new Date().getMonth(); // 0-11
+  let weatherInterval;
+
+  // Clear any existing weather effects
+  clearInterval(weatherInterval);
+
+  // Winter months (November-February)
+  if (month >= 10 || month <= 1) {
+    // Create initial snowflakes
+    for (let i = 0; i < 50; i++) {
+      setTimeout(createSnowflake, Math.random() * 5000);
+    }
+    weatherInterval = setInterval(createSnowflake, 100);
+  }
+  // Rainy season (typically June-September in many places)
+  else if (month >= 5 && month <= 8) {
+    // Create initial raindrops
+    for (let i = 0; i < 100; i++) {
+      setTimeout(createRaindrop, Math.random() * 2000);
+    }
+    weatherInterval = setInterval(createRaindrop, 50);
+  }
+}
+
 smoothScroll();
 startLoad();
 loaderAnimation();
 cursorFollower();
 getCurrentTime();
 worksPageAnimation();
+startSnowfall();
+// startWeatherEffect();
